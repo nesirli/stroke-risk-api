@@ -12,7 +12,7 @@ def load_stroke_data() -> tuple[pd.DataFrame, pd.Series]:
         )
 
     df = pd.read_csv(path)
-    X = df.drop('stroke', axis=1)
+    X = df.drop(columns=['stroke', 'id'])
     y = df['stroke']
 
     return X, y
