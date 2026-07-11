@@ -47,6 +47,25 @@ def interpret_model(X, y):
     shap.plots.waterfall(shap_values[sample_ind], show=False)
     plt.savefig(plot_dir / "log_reg_shap_waterfall.png", dpi=150, bbox_inches="tight")
     plt.close()
+
+    shap.plots.bar(shap_values, show=False)
+    plt.savefig(plot_dir / "log_reg_bar.png", dpi=150, bbox_inches="tight")
+    plt.close()
+
+    n_decision_samples = 10
+    shap.plots.decision(
+        explainer.expected_value,
+        shap_values.values[:n_decision_samples],
+        feature_names=feature_names,
+        show=False,
+    )
+    plt.savefig(plot_dir / "log_reg_decision.png", dpi=150, bbox_inches="tight")
+    plt.close()
+
+    for col in ["age", "avg_glucose_level"]:
+        shap.plots.scatter(shap_values[:, col], show=False)
+        plt.savefig(plot_dir / f"log_reg_scatter_{col}.png", dpi=150, bbox_inches="tight")
+        plt.close()
     
     print(f"SHAP plots are saved in {plot_dir}.")
 
