@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     mlflow_experiment: str = "stroke-risk"
     data_dir: Path = ROOT_PATH / "data"
     best_params_path: Path = ROOT_PATH / "data" / "best_params.json"
+    plot_dir: Path = ROOT_PATH / "plots"
 
     model_config = SettingsConfigDict(env_file=ROOT_PATH / ".env")
 

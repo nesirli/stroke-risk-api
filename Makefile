@@ -22,5 +22,8 @@ test:
 validate_data:
 	uv run python -m src.stroke_risk.utils.validate_data
 
+interpret:
+	uv run python -m src.stroke_risk.models.interpret
+
 lint:
 	uv run ruff check src tests
