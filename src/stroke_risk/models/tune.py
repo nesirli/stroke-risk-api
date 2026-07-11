@@ -1,11 +1,14 @@
+import json
 import warnings
-
 import optuna
+
 from sklearn.model_selection import StratifiedKFold, cross_val_score
 from sklearn.pipeline import Pipeline
-from stroke_risk.features.build_features import build_preprocessor
 from sklearn.linear_model import LogisticRegression
+
 from stroke_risk.ingest.load_data import load_stroke_data
+from stroke_risk.config import settings
+from stroke_risk.features.build_features import build_preprocessor
 
 warnings.filterwarnings("ignore", message=".*'penalty' was deprecated.*")
 warnings.filterwarnings("ignore", message="Inconsistent values: penalty=.*")
@@ -41,6 +44,9 @@ def tune_model(X, y):
 
     print(f'Best log-reg params: {study_log.best_params}')
     print(f'Best log-reg ROC-AUC: {study_log.best_value}')
+
+    settings.best_params_path.write_text(json.dumps(study_log.best_params, indent=2))
+    print(f'Saved best params to {settings.best_params_path}')
 
 if __name__ == '__main__':
     X, y = load_stroke_data()
