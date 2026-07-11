@@ -1,5 +1,5 @@
 all:
-	install train tune evaluate predict
+	install validate_data test tune train evaluate inference
 
 install:
 	uv sync --all-extras
@@ -18,6 +18,9 @@ inference:
 
 test:
 	uv run pytest tests/
+
+validate_data:
+	uv run python -m src.stroke_risk.utils.validate_data
 
 lint:
 	uv run ruff check src tests
