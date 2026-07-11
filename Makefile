@@ -25,5 +25,8 @@ validate_data:
 interpret:
 	uv run python -m src.stroke_risk.models.interpret
 
+serve-api:
+	uv run uvicorn src.stroke_risk.app.main:app --reload
+
 lint:
 	uv run ruff check src tests

@@ -9,11 +9,11 @@ REQUIRED_COLUMNS = [
 ]
 
 CATEGORICAL_VALUES = {
-    "gender": ["Male", "Female", "Other"],
-    "ever_married": ["Yes", "No"],
-    "work_type": ["Private", "Self-employed", "Govt_job", "children", "Never_worked"],
-    "residence_type": ["Urban", "Rural"],
-    "smoking_status": ["formerly smoked", "never smoked", "smokes", "Unknown"],
+    "gender": ["male", "female", "other"],
+    "ever_married": ["yes", "no"],
+    "work_type": ["private", "self_employed", "govt_job", "children", "never_worked"],
+    "residence_type": ["urban", "rural"],
+    "smoking_status": ["formerly_smoked", "never_smoked", "smokes", "unknown"],
 }
 
 def validate_stroke_data(X: pd.DataFrame, y: pd.Series):
