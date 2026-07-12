@@ -1,6 +1,7 @@
 from stroke_risk.ingest.load_data import load_stroke_data
 import pandas as pd
 
+
 def test_load_stroke_data():
     X, y = load_stroke_data()
     assert isinstance(X, pd.DataFrame)

@@ -5,6 +5,7 @@ from sklearn.pipeline import Pipeline
 
 from stroke_risk.config import settings
 
+
 def load_model() -> Pipeline:
     """Load the champion model from the MLflow registry."""
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
@@ -12,21 +13,22 @@ def load_model() -> Pipeline:
         f"models:/{settings.mlflow_model_name}@{settings.mlflow_model_alias}"
     )
 
+
 def predict(patient: dict, model: Pipeline) -> dict:
     """Score a single patient dict and return a human-readable prediction."""
-    patient_id = patient.pop('id')
+    patient_id = patient.pop("id")
 
     prediction = model.predict(pd.DataFrame([patient]))[0]
-    prediction_interpret = 'High Risk of Stroke' if prediction == 1 else 'Low Risk of Stroke'
+    prediction_interpret = (
+        "High Risk of Stroke" if prediction == 1 else "Low Risk of Stroke"
+    )
 
-    result = {
-        'patient_id': patient_id,
-        'prediction': prediction_interpret
-    }
+    result = {"patient_id": patient_id, "prediction": prediction_interpret}
 
     return result
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     patient = {
         "id": 1,
         "age": 67,

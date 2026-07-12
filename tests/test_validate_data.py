@@ -5,18 +5,20 @@ from stroke_risk.utils.validate_data import validate_stroke_data
 
 
 def _valid_data() -> tuple[pd.DataFrame, pd.Series]:
-    X = pd.DataFrame({
-        "gender": ["male", "female"],
-        "age": [45.0, 60.0],
-        "hypertension": [0, 1],
-        "heart_disease": [0, 0],
-        "ever_married": ["yes", "no"],
-        "work_type": ["private", "self_employed"],
-        "residence_type": ["urban", "rural"],
-        "avg_glucose_level": [100.0, 150.0],
-        "bmi": [25.0, 28.0],
-        "smoking_status": ["never_smoked", "smokes"],
-    })
+    X = pd.DataFrame(
+        {
+            "gender": ["male", "female"],
+            "age": [45.0, 60.0],
+            "hypertension": [0, 1],
+            "heart_disease": [0, 0],
+            "ever_married": ["yes", "no"],
+            "work_type": ["private", "self_employed"],
+            "residence_type": ["urban", "rural"],
+            "avg_glucose_level": [100.0, 150.0],
+            "bmi": [25.0, 28.0],
+            "smoking_status": ["never_smoked", "smokes"],
+        }
+    )
     y = pd.Series([0, 1], name="stroke")
     return X, y
 

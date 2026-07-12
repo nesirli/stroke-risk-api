@@ -18,7 +18,9 @@ def test_promote_best_model_registers_top_run(monkeypatch):
     monkeypatch.setattr(promote_module.mlflow, "register_model", register_model_mock)
 
     client_mock = MagicMock()
-    monkeypatch.setattr(promote_module.mlflow, "MlflowClient", MagicMock(return_value=client_mock))
+    monkeypatch.setattr(
+        promote_module.mlflow, "MlflowClient", MagicMock(return_value=client_mock)
+    )
 
     promote_module.promote_best_model()
 
@@ -40,7 +42,9 @@ def test_promote_best_model_registers_top_run(monkeypatch):
 
 def test_promote_best_model_raises_when_no_runs(monkeypatch):
     monkeypatch.setattr(promote_module.mlflow, "set_tracking_uri", MagicMock())
-    monkeypatch.setattr(promote_module.mlflow, "search_runs", MagicMock(return_value=pd.DataFrame()))
+    monkeypatch.setattr(
+        promote_module.mlflow, "search_runs", MagicMock(return_value=pd.DataFrame())
+    )
 
     with pytest.raises(ValueError):
         promote_module.promote_best_model()

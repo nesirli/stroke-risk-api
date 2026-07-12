@@ -3,9 +3,17 @@ import pandas as pd
 from stroke_risk.ingest.load_data import load_stroke_data
 
 REQUIRED_COLUMNS = [
-    "gender", "age", "hypertension", "heart_disease", "ever_married",
-    "work_type", "residence_type", "avg_glucose_level", "bmi",
-    "smoking_status", "stroke",
+    "gender",
+    "age",
+    "hypertension",
+    "heart_disease",
+    "ever_married",
+    "work_type",
+    "residence_type",
+    "avg_glucose_level",
+    "bmi",
+    "smoking_status",
+    "stroke",
 ]
 
 CATEGORICAL_VALUES = {
@@ -16,18 +24,19 @@ CATEGORICAL_VALUES = {
     "smoking_status": ["formerly_smoked", "never_smoked", "smokes", "unknown"],
 }
 
+
 def validate_stroke_data(X: pd.DataFrame, y: pd.Series) -> None:
     """Validate a stroke dataset against schema and value-range expectations, raising on failure."""
     print("Starting data validation with Great Expectations.")
 
     df = pd.concat([X, y], axis=1)
 
-    context = gx.get_context(mode='ephemeral')
+    context = gx.get_context(mode="ephemeral")
 
     batch = (
-        context.data_sources.add_pandas('pandas')
-        .add_dataframe_asset('stroke_data')
-        .add_batch_definition_whole_dataframe('batch')
+        context.data_sources.add_pandas("pandas")
+        .add_dataframe_asset("stroke_data")
+        .add_batch_definition_whole_dataframe("batch")
         .get_batch(batch_parameters={"dataframe": df})
     )
 
@@ -82,10 +91,13 @@ def validate_stroke_data(X: pd.DataFrame, y: pd.Series) -> None:
                 failed_details.append(f"- {exp_type} on '{col}'")
 
         error_msg = "\n".join(failed_details)
-        raise ValueError(f"Data validation failed on the following checks:\n{error_msg}")
+        raise ValueError(
+            f"Data validation failed on the following checks:\n{error_msg}"
+        )
 
     print("Data validation completed successfully.")
 
-if __name__ == '__main__':
+
+if __name__ == "__main__":
     X, y = load_stroke_data()
     validate_stroke_data(X, y)

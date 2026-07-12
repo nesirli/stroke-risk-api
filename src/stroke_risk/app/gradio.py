@@ -6,6 +6,7 @@ from stroke_risk.serving.inference import predict as run_prediction
 
 def build_demo(app: FastAPI) -> gr.Blocks:
     """Build the Gradio UI that scores patients via the given FastAPI app's model."""
+
     def call_predict(
         patient_id: int,
         age: float,
@@ -46,22 +47,42 @@ def build_demo(app: FastAPI) -> gr.Blocks:
 
         with gr.Row():
             with gr.Column():
-                patient_id = gr.Number(label="Patient ID", value=1, precision=0, minimum=1)
-                age = gr.Slider(label="Age", minimum=0.1, maximum=119.9, value=45, step=0.1)
-                avg_glucose_level = gr.Number(label="Avg Glucose Level", value=100.0, minimum=50.01)
+                patient_id = gr.Number(
+                    label="Patient ID", value=1, precision=0, minimum=1
+                )
+                age = gr.Slider(
+                    label="Age", minimum=0.1, maximum=119.9, value=45, step=0.1
+                )
+                avg_glucose_level = gr.Number(
+                    label="Avg Glucose Level", value=100.0, minimum=50.01
+                )
                 bmi = gr.Number(label="BMI (optional)", value=None)
-                gender = gr.Radio(["male", "female", "other"], label="Gender", value="male")
-                ever_married = gr.Radio(["yes", "no"], label="Ever Married", value="yes")
+                gender = gr.Radio(
+                    ["male", "female", "other"], label="Gender", value="male"
+                )
+                ever_married = gr.Radio(
+                    ["yes", "no"], label="Ever Married", value="yes"
+                )
 
             with gr.Column():
                 hypertension = gr.Radio(["0", "1"], label="Hypertension", value="0")
                 heart_disease = gr.Radio(["0", "1"], label="Heart Disease", value="0")
-                work_type = gr.Dropdown(["children","govt_job","never_worked","private","self_employed",],
+                work_type = gr.Dropdown(
+                    [
+                        "children",
+                        "govt_job",
+                        "never_worked",
+                        "private",
+                        "self_employed",
+                    ],
                     label="Work Type",
                     value="private",
                 )
-                residence_type = gr.Radio(["urban", "rural"], label="Residence Type", value="urban")
-                smoking_status = gr.Dropdown(["formerly_smoked", "never_smoked", "smokes", "unknown"],
+                residence_type = gr.Radio(
+                    ["urban", "rural"], label="Residence Type", value="urban"
+                )
+                smoking_status = gr.Dropdown(
+                    ["formerly_smoked", "never_smoked", "smokes", "unknown"],
                     label="Smoking Status",
                     value="never_smoked",
                 )

@@ -6,18 +6,29 @@ from stroke_risk.models.model import build_log_reg_pipeline
 
 
 def _toy_dataset() -> tuple[pd.DataFrame, pd.Series]:
-    X = pd.DataFrame({
-        "age": [25, 40, 60, 70, 30, 50, 65, 45],
-        "hypertension": [0, 0, 1, 1, 0, 1, 1, 0],
-        "heart_disease": [0, 0, 0, 1, 0, 0, 1, 0],
-        "avg_glucose_level": [90, 110, 130, 200, 95, 150, 180, 100],
-        "bmi": [22, 25, 28, 31, 23, 27, 30, 24],
-        "gender": ["male", "female", "male", "female", "male", "female", "male", "female"],
-        "ever_married": ["no", "yes", "yes", "yes", "no", "yes", "yes", "no"],
-        "work_type": ["private"] * 8,
-        "residence_type": ["urban", "rural"] * 4,
-        "smoking_status": ["never_smoked"] * 8,
-    })
+    X = pd.DataFrame(
+        {
+            "age": [25, 40, 60, 70, 30, 50, 65, 45],
+            "hypertension": [0, 0, 1, 1, 0, 1, 1, 0],
+            "heart_disease": [0, 0, 0, 1, 0, 0, 1, 0],
+            "avg_glucose_level": [90, 110, 130, 200, 95, 150, 180, 100],
+            "bmi": [22, 25, 28, 31, 23, 27, 30, 24],
+            "gender": [
+                "male",
+                "female",
+                "male",
+                "female",
+                "male",
+                "female",
+                "male",
+                "female",
+            ],
+            "ever_married": ["no", "yes", "yes", "yes", "no", "yes", "yes", "no"],
+            "work_type": ["private"] * 8,
+            "residence_type": ["urban", "rural"] * 4,
+            "smoking_status": ["never_smoked"] * 8,
+        }
+    )
     y = pd.Series([0, 0, 0, 1, 0, 1, 1, 0])
     return X, y
 

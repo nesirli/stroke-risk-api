@@ -3,6 +3,7 @@ from pathlib import Path
 
 ROOT_PATH = Path(__file__).parent.parent.parent
 
+
 class Settings(BaseSettings):
     """Project-wide configuration, overridable via environment variables or .env."""
 
@@ -16,5 +17,6 @@ class Settings(BaseSettings):
     plot_dir: Path = ROOT_PATH / "plots"
 
     model_config = SettingsConfigDict(env_file=ROOT_PATH / ".env")
+
 
 settings = Settings()

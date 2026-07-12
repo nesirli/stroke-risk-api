@@ -3,23 +3,26 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-NUM_COLS = ['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi']
-CAT_COLS = ['gender', 'ever_married', 'work_type', 'residence_type', 'smoking_status']
+NUM_COLS = ["age", "hypertension", "heart_disease", "avg_glucose_level", "bmi"]
+CAT_COLS = ["gender", "ever_married", "work_type", "residence_type", "smoking_status"]
 
 
 def build_preprocessor() -> ColumnTransformer:
     """Build a ColumnTransformer that scales numeric features and one-hot-encodes categoricals."""
-    num_pipeline = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='median')),
-        ('scaler', StandardScaler())
-    ])
+    num_pipeline = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="median")),
+            ("scaler", StandardScaler()),
+        ]
+    )
 
-    cat_pipeline = Pipeline(steps=[
-        ('imputer', SimpleImputer(strategy='most_frequent')),
-        ('encoder', OneHotEncoder(handle_unknown='ignore'))
-    ])
+    cat_pipeline = Pipeline(
+        steps=[
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            ("encoder", OneHotEncoder(handle_unknown="ignore")),
+        ]
+    )
 
-    return ColumnTransformer([
-        ('num', num_pipeline, NUM_COLS),
-        ('cat', cat_pipeline, CAT_COLS)
-    ])
+    return ColumnTransformer(
+        [("num", num_pipeline, NUM_COLS), ("cat", cat_pipeline, CAT_COLS)]
+    )

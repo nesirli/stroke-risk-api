@@ -17,20 +17,23 @@ async def lifespan(app: FastAPI) -> AsyncIterator[None]:
 
 
 app = FastAPI(
-    title='Stroke Prediction API',
-    version='0.1.0',
+    title="Stroke Prediction API",
+    version="0.1.0",
     lifespan=lifespan,
 )
 
-@app.get('/health')
+
+@app.get("/health")
 def get_health_status() -> dict[str, str]:
     """Report service liveness for health checks."""
-    return {'status': 'ok'}
+    return {"status": "ok"}
 
-@app.post('/predict')
+
+@app.post("/predict")
 def predict_stroke(patient: Patient, request: Request) -> dict:
     """Score a patient using the model loaded at startup."""
     result = predict(patient.model_dump(), request.app.state.model)
     return result
+
 
 gr.mount_gradio_app(app, build_demo(app), path="/gradio")
