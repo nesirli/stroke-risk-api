@@ -9,6 +9,10 @@ RUN uv sync --frozen
 
 COPY src /app/src
 
+# mount the host data/ dir here (contains mlflow.db + mlruns/) so the
+# registered model promoted via `make promote` is available to serve
+VOLUME ["/app/data"]
+
 EXPOSE 8000
 
 HEALTHCHECK --interval=30s --timeout=3s --start-period=5s --retries=3 \

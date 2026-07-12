@@ -19,7 +19,17 @@ def train_model(X: pd.DataFrame, y: pd.Series) -> None:
     pipeline = build_log_reg_pipeline(**best_params)
 
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
-    mlflow.set_experiment(settings.mlflow_experiment)
+
+    client = mlflow.MlflowClient()
+    experiment = client.get_experiment_by_name(settings.mlflow_experiment)
+    if experiment is None:
+        experiment_id = client.create_experiment(
+            settings.mlflow_experiment,
+            artifact_location=str(settings.mlflow_artifact_location),
+        )
+    else:
+        experiment_id = experiment.experiment_id
+    mlflow.set_experiment(experiment_id=experiment_id)
 
     with mlflow.start_run():
 

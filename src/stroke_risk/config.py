@@ -8,6 +8,7 @@ class Settings(BaseSettings):
     mlflow_experiment: str = "stroke-risk"
     mlflow_model_name: str = "stroke-risk"
     mlflow_model_alias: str = "champion"
+    mlflow_artifact_location: Path = ROOT_PATH / "data" / "mlruns"
     data_dir: Path = ROOT_PATH / "data"
     best_params_path: Path = ROOT_PATH / "data" / "best_params.json"
     plot_dir: Path = ROOT_PATH / "plots"
