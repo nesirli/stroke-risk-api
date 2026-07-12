@@ -4,6 +4,8 @@ from pathlib import Path
 ROOT_PATH = Path(__file__).parent.parent.parent
 
 class Settings(BaseSettings):
+    """Project-wide configuration, overridable via environment variables or .env."""
+
     mlflow_tracking_uri: str = f"sqlite:///{ROOT_PATH / 'data' / 'mlflow.db'}"
     mlflow_experiment: str = "stroke-risk"
     mlflow_model_name: str = "stroke-risk"

@@ -16,7 +16,8 @@ CATEGORICAL_VALUES = {
     "smoking_status": ["formerly_smoked", "never_smoked", "smokes", "unknown"],
 }
 
-def validate_stroke_data(X: pd.DataFrame, y: pd.Series):
+def validate_stroke_data(X: pd.DataFrame, y: pd.Series) -> None:
+    """Validate a stroke dataset against schema and value-range expectations, raising on failure."""
     print("Starting data validation with Great Expectations.")
 
     df = pd.concat([X, y], axis=1)

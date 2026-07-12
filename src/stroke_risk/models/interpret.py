@@ -2,6 +2,7 @@ import shap
 import mlflow
 import re
 import matplotlib.pyplot as plt
+import pandas as pd
 from sklearn.model_selection import train_test_split
 
 from stroke_risk.config import settings
@@ -9,7 +10,8 @@ from stroke_risk.ingest.load_data import load_stroke_data
 from stroke_risk.features.build_features import NUM_COLS
 
 
-def interpret_model(X, y):
+def interpret_model(X: pd.DataFrame, y: pd.Series) -> None:
+    """Generate SHAP explanation plots for the most recent MLflow run's model."""
 
     X_train, X_test, _, _ = train_test_split(X, y, test_size=0.2, random_state=1, stratify=y)
 

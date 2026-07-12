@@ -13,6 +13,7 @@ from stroke_risk.config import settings
 trusted_types = ["numpy.dtype"]
 
 def train_model(X: pd.DataFrame, y: pd.Series) -> None:
+    """Train a logistic regression pipeline on the best known params and log it to MLflow."""
     X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, random_state=1, stratify=y)
 
     best_params = json.loads(settings.best_params_path.read_text())

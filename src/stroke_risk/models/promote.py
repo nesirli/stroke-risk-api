@@ -4,6 +4,7 @@ from stroke_risk.config import settings
 
 
 def promote_best_model() -> None:
+    """Register the MLflow run with the highest AUC as the serving champion."""
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
 
     runs = mlflow.search_runs(

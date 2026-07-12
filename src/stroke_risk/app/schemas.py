@@ -2,6 +2,8 @@ from pydantic import BaseModel, Field
 from typing import Literal
 
 class Patient(BaseModel):
+    """Input schema for a single stroke-risk prediction request."""
+
     id: int = Field(gt=0)
     age: float = Field(gt=0.0, lt=120.0)
     hypertension: Literal[0, 1]

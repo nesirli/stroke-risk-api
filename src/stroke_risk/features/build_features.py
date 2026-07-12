@@ -7,7 +7,8 @@ NUM_COLS = ['age', 'hypertension', 'heart_disease', 'avg_glucose_level', 'bmi']
 CAT_COLS = ['gender', 'ever_married', 'work_type', 'residence_type', 'smoking_status']
 
 
-def build_preprocessor():
+def build_preprocessor() -> ColumnTransformer:
+    """Build a ColumnTransformer that scales numeric features and one-hot-encodes categoricals."""
     num_pipeline = Pipeline(steps=[
         ('imputer', SimpleImputer(strategy='median')),
         ('scaler', StandardScaler())

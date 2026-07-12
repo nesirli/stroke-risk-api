@@ -1,16 +1,19 @@
 import mlflow
 import mlflow.sklearn
 import pandas as pd
+from sklearn.pipeline import Pipeline
 
 from stroke_risk.config import settings
 
-def load_model():
+def load_model() -> Pipeline:
+    """Load the champion model from the MLflow registry."""
     mlflow.set_tracking_uri(settings.mlflow_tracking_uri)
     return mlflow.sklearn.load_model(
         f"models:/{settings.mlflow_model_name}@{settings.mlflow_model_alias}"
     )
 
-def predict(patient: dict, model) -> dict:
+def predict(patient: dict, model: Pipeline) -> dict:
+    """Score a single patient dict and return a human-readable prediction."""
     patient_id = patient.pop('id')
 
     prediction = model.predict(pd.DataFrame([patient]))[0]

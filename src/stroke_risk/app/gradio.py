@@ -1,9 +1,11 @@
 import gradio as gr
+from fastapi import FastAPI
 
 from stroke_risk.serving.inference import predict as run_prediction
 
 
-def build_demo(app) -> gr.Blocks:
+def build_demo(app: FastAPI) -> gr.Blocks:
+    """Build the Gradio UI that scores patients via the given FastAPI app's model."""
     def call_predict(
         patient_id: int,
         age: float,
@@ -17,6 +19,7 @@ def build_demo(app) -> gr.Blocks:
         residence_type: str,
         smoking_status: str,
     ) -> str:
+        """Score patient inputs from the UI and format a result string."""
         payload = {
             "id": int(patient_id),
             "age": age,
