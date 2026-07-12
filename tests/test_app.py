@@ -49,3 +49,17 @@ def test_predict_rejects_invalid_patient(client):
     response = client.post("/predict", json={**VALID_PATIENT, "gender": "invalid"})
 
     assert response.status_code == 422
+
+
+def test_predict_returns_503_when_no_model_available(monkeypatch):
+    def raise_not_found():
+        raise Exception("Registered Model with name=stroke-risk not found")
+
+    monkeypatch.setattr(app_main, "load_model", raise_not_found)
+
+    with TestClient(app_main.app) as client:
+        health_response = client.get("/health")
+        predict_response = client.post("/predict", json=VALID_PATIENT)
+
+    assert health_response.status_code == 200
+    assert predict_response.status_code == 503
