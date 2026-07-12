@@ -44,6 +44,10 @@ def build_demo(app: FastAPI) -> gr.Blocks:
 
     with gr.Blocks(title="Stroke Risk Predictor") as demo:
         gr.Markdown("# Stroke Risk Predictor")
+        gr.Markdown(
+            "Enter a patient's health profile to estimate their risk of stroke. "
+            "This is a demo model and not a substitute for medical advice."
+        )
 
         with gr.Row():
             with gr.Column():
