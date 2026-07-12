@@ -206,4 +206,4 @@ This order matters. The image only gets built and published if the code actually
 
 ## License
 
-No license file yet. All rights reserved by default until one is added.
+MIT. See [LICENSE](LICENSE).

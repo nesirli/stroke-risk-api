@@ -3,6 +3,7 @@ name = "stroke-risk"
 version = "0.1.0"
 description = "Stroke Risk Prediction API"
 readme = "README.md"
+license = "MIT"
 requires-python = ">=3.12"
 dependencies = [
     "fastapi>=0.139.0",
